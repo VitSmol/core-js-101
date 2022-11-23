@@ -50,3 +50,14 @@ return String.fromCharCode(...result)
 let result = encodeToRot13(str)
 console.log(result);
 console.log(` `.charCodeAt(0));
+
+console.log(Number.MAX_VALUE - 1);
+
+function getLastDigit(value) {
+  // throw new Error('Not implemented');
+  return value.toString().at(-1)
+}
+
+let lastD = getLastDigit(5556)
+
+console.log(typeof lastD);
