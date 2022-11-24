@@ -126,3 +126,41 @@
 
 // let result = propagateItemsByPositionIndex(arr)
 // console.log(result);
+
+const arr = [
+  { country: 'Russia', city: 'Moscow' },
+  { country: 'Belarus', city: 'Minsk' },
+  { country: 'Poland', city: 'Warsaw' },
+  { country: 'Russia', city: 'Saint Petersburg' },
+  { country: 'Poland', city: 'Krakow' },
+  { country: 'Belarus', city: 'Brest' }
+]
+
+function sortCitiesArray(arr) {
+  return arr.sort((a, b) => a.country > b.country ? 1 : -1)
+}
+
+// let result = sortCitiesArray(arr)
+
+
+// function getIdentityMatrix(n) {
+//   return new Array(n).fill(0)
+//     .map((el, ind) => new Array(n).fill(0)
+//     .map((e,i) => i === ind ? 1 : e))
+// }
+
+// let result = getIdentityMatrix(4)
+// console.log(result);
+
+function getIntervalArray(start, end) {
+  let count = end - start;
+  let startCount = start;
+  const result = new Array(count + 1).fill(start).map(() => {
+    const res = startCount;
+    startCount += 1;
+    return res;
+  });
+  return result;
+}
+let result = getIntervalArray(-2, 2)
+console.log(result);
