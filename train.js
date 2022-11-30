@@ -127,14 +127,14 @@
 // let result = propagateItemsByPositionIndex(arr)
 // console.log(result);
 
-const arr = [
-  { country: 'Russia', city: 'Moscow' },
-  { country: 'Belarus', city: 'Minsk' },
-  { country: 'Poland', city: 'Warsaw' },
-  { country: 'Russia', city: 'Saint Petersburg' },
-  { country: 'Poland', city: 'Krakow' },
-  { country: 'Belarus', city: 'Brest' }
-]
+// const arr = [
+//   { country: 'Russia', city: 'Moscow' },
+//   { country: 'Belarus', city: 'Minsk' },
+//   { country: 'Poland', city: 'Warsaw' },
+//   { country: 'Russia', city: 'Saint Petersburg' },
+//   { country: 'Poland', city: 'Krakow' },
+//   { country: 'Belarus', city: 'Brest' }
+// ]
 
 function sortCitiesArray(arr) {
   return arr.sort((a, b) => a.country > b.country ? 1 : -1)
@@ -152,15 +152,108 @@ function sortCitiesArray(arr) {
 // let result = getIdentityMatrix(4)
 // console.log(result);
 
-function getIntervalArray(start, end) {
-  let count = end - start;
-  let startCount = start;
-  const result = new Array(count + 1).fill(start).map(() => {
-    const res = startCount;
-    startCount += 1;
-    return res;
-  });
-  return result;
+// function getIntervalArray(start, end) {
+//   let count = end - start;
+//   let startCount = start;
+//   const result = new Array(count + 1).fill(start).map(() => {
+//     const res = startCount;
+//     startCount += 1;
+//     return res;
+//   });
+//   return result;
+// }
+// let result = getIntervalArray(-2, 2)
+// console.log(result);
+
+let arr = [
+  { country: 'Belarus', city: 'Brest' },
+  { country: 'Russia', city: 'Omsk' },
+  { country: 'Russia', city: 'Samara' },
+  { country: 'Belarus', city: 'Grodno' },
+  { country: 'Belarus', city: 'Minsk' },
+  { country: 'Poland', city: 'Lodz' }
+]
+
+// function group(array, keySelector, valueSelector) {
+//   // console.log(array);
+//   const result = array.reduce((acc, el) => {
+//     const key = keySelector(el);
+//     const value = valueSelector(el);
+//     return {
+//       ...acc,
+//       [keySelector(el)]: acc[key] ? [...acc[key], value] : [value],
+//     }
+//   }, {});
+//   return Object.entries(result);
+// }
+
+// group(arr,`country`,`city`)
+
+
+let array = [1, 2, 3, 4, 5, 6]
+
+/*    \----/   \----/
+*     head     tail
+*
+*   [ 1, 2 ]  => [ 2, 1 ]
+*   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
+*
+*/
+function swapHeadAndTail(arr) {
+  //  throw new Error('Not implemented');
+  if (arr.length % 2 === 1) {
+    let oddIndex = Math.floor(arr.length / 2)
+    let startArray = arr.slice(0, oddIndex)
+    let endArray = arr.slice(oddIndex + 1, arr.length);
+    let middleElement = arr[oddIndex];
+    return [...endArray, middleElement,...startArray];
+  } else {
+    let index = arr.length / 2;
+    let startArray = arr.slice(0, index);
+    let endArray = arr.slice(index, arr.length);
+    return [...endArray, ...startArray];
+  }
 }
-let result = getIntervalArray(-2, 2)
-console.log(result);
+
+swapHeadAndTail(array)
+let date = `2015,1,1`
+let date2 = `2016,1,1`
+
+function isLeapYear(date) {
+
+}
+// console.log(
+
+//   isLeapYear(date)
+//   );
+/*
+  */
+// let start = `2000,1,1,10,0,0`
+// let end = `2000,1,1,11,0,0` //=> "01:00:00.000"
+//  / *    Date(2000,1,1,10,0,0),  Date(2000,1,1,10,30,0)       => "00:30:00.000"
+//   *    Date(2000,1,1,10,0,0),  Date(2000,1,1,10,0,20)        => "00:00:20.000"
+//   *    Date(2000,1,1,10,0,0),  Date(2000,1,1,10,0,0,250)     => "00:00:00.250"
+//   *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
+//   */
+//  function timeSpanToString(startDate, endDate) {
+//   //  throw new Error('Not implemented');
+//   // let dif = new Date(endDate).getMilliseconds() - new Date(startDate).getMilliseconds()
+//   let start = new Date(`${startDate}`)
+//   let end = new Date(endDate)
+//   console.log(start.getHours());
+//   console.log(end);
+//  }
+
+//  timeSpanToString(start, end);
+// console.log(3%3);
+
+  //  1,2   =>  3  ( = 1+2 )
+  //  5,10  =>  45 ( = 5+6+7+8+9+10 )
+  //  -1,1  =>  0  ( = -1 + 0 + 1 )
+
+let start = -1;
+let end = 1;
+
+let str = `acbde debc`;
+
+console.log(Number(`13`));

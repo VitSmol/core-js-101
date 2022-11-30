@@ -564,8 +564,15 @@ function distinct(arr) {
  *    "Poland" => ["Lodz"]
  *   }
  */
-function group(/* array, keySelector, valueSelector */) {
-  throw new Error('Not implemented');
+function group(array, keySelector, valueSelector) {
+  return Object.entries(array.reduce((acc, el) => {
+    const k = keySelector(el);
+    const v = valueSelector(el);
+    return {
+      ...acc,
+      [keySelector(el)]: acc[k] ? [...acc[k], v] : [v],
+    };
+  }, {}));
 }
 
 
@@ -582,8 +589,8 @@ function group(/* array, keySelector, valueSelector */) {
  *   [[1, 2], [3, 4], [5, 6]], (x) => x     =>   [ 1, 2, 3, 4, 5, 6 ]
  *   ['one','two','three'], (x) => x.split('')  =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
-function selectMany(/* arr, childrenSelector */) {
-  throw new Error('Not implemented');
+function selectMany(arr, childrenSelector) {
+  return arr.map(childrenSelector).flat(Infinity);
 }
 
 
@@ -599,8 +606,14 @@ function selectMany(/* arr, childrenSelector */) {
  *   ['one','two','three'], [2]       => 'three'  (arr[2])
  *   [[[ 1, 2, 3]]], [ 0, 0, 1 ]      => 2        (arr[0][0][1])
  */
-function getElementByIndexes(/* arr, indexes */) {
-  throw new Error('Not implemented');
+function getElementByIndexes(arr, indexes) {
+  let result = arr;
+  indexes.map((item) => {
+    result = result[item];
+    return item;
+  });
+  return result;
+  // throw new Error('Not implemented');
 }
 
 
@@ -622,8 +635,19 @@ function getElementByIndexes(/* arr, indexes */) {
  *   [ 1, 2, 3, 4, 5, 6, 7, 8 ]   =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  // throw new Error('Not implemented');
+  if (arr.length % 2 === 1) {
+    const oddIndex = Math.floor(arr.length / 2);
+    const startArray = arr.slice(0, oddIndex);
+    const endArray = arr.slice(oddIndex + 1, arr.length);
+    const middleElement = arr[oddIndex];
+    return [...endArray, middleElement, ...startArray];
+  }
+  const index = arr.length / 2;
+  const startArray = arr.slice(0, index);
+  const endArray = arr.slice(index, arr.length);
+  return [...endArray, ...startArray];
 }
 
 
