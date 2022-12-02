@@ -65,6 +65,7 @@ function getPowerFunction(exponent) {
  */
 function getPolynom() {
   throw new Error('Not implemented');
+  // if (arguments.length === 2)
 }
 
 
@@ -170,8 +171,13 @@ function partialUsingArguments(/* fn, ...args1 */) {
  *   getId4() => 7
  *   getId10() => 11
  */
-function getIdGeneratorFunction(/* startFrom */) {
-  throw new Error('Not implemented');
+function getIdGeneratorFunction(startFrom) {
+  let count = startFrom - 1;
+  // throw new Error('Not implemented');
+  return function getId() {
+    count += 1;
+    return count;
+  };
 }
 
 

@@ -1,6 +1,6 @@
 // // // function extractNameFromTemplate(value) {
 // // //   // throw new Error('Not implemented');
-// // //   return value.replace(/Hello, /g, "").replace(/!/g, "").trim()
+// // //   return value.replace(/Hello, /g, '').replace(/!/g, '').trim()
 // // // }
 
 // // // console.log(extractNameFromTemplate(`Hello, Chuck Norris!`));
@@ -206,7 +206,7 @@ function swapHeadAndTail(arr) {
     let startArray = arr.slice(0, oddIndex)
     let endArray = arr.slice(oddIndex + 1, arr.length);
     let middleElement = arr[oddIndex];
-    return [...endArray, middleElement,...startArray];
+    return [...endArray, middleElement, ...startArray];
   } else {
     let index = arr.length / 2;
     let startArray = arr.slice(0, index);
@@ -229,11 +229,11 @@ function isLeapYear(date) {
 /*
   */
 // let start = `2000,1,1,10,0,0`
-// let end = `2000,1,1,11,0,0` //=> "01:00:00.000"
-//  / *    Date(2000,1,1,10,0,0),  Date(2000,1,1,10,30,0)       => "00:30:00.000"
-//   *    Date(2000,1,1,10,0,0),  Date(2000,1,1,10,0,20)        => "00:00:20.000"
-//   *    Date(2000,1,1,10,0,0),  Date(2000,1,1,10,0,0,250)     => "00:00:00.250"
-//   *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
+// let end = `2000,1,1,11,0,0` //=> '01:00:00.000'
+//  / *    Date(2000,1,1,10,0,0),  Date(2000,1,1,10,30,0)       => '00:30:00.000'
+//   *    Date(2000,1,1,10,0,0),  Date(2000,1,1,10,0,20)        => '00:00:20.000'
+//   *    Date(2000,1,1,10,0,0),  Date(2000,1,1,10,0,0,250)     => '00:00:00.250'
+//   *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => '05:20:10.453'
 //   */
 //  function timeSpanToString(startDate, endDate) {
 //   //  throw new Error('Not implemented');
@@ -247,13 +247,104 @@ function isLeapYear(date) {
 //  timeSpanToString(start, end);
 // console.log(3%3);
 
-  //  1,2   =>  3  ( = 1+2 )
-  //  5,10  =>  45 ( = 5+6+7+8+9+10 )
-  //  -1,1  =>  0  ( = -1 + 0 + 1 )
+//  1,2   =>  3  ( = 1+2 )
+//  5,10  =>  45 ( = 5+6+7+8+9+10 )
+//  -1,1  =>  0  ( = -1 + 0 + 1 )
 
-let start = -1;
-let end = 1;
 
-let str = `acbde debc`;
+// console.log(
+//   (1024).toString(2)
+// );
 
-console.log(Number(`13`));
+const brackets = () => {
+  let str = `{)`;
+  let pattern = {
+    '}': '{',
+    ')': '(',
+    ']': '[',
+    '>': '<',
+  };
+  let closeParentheses = ['}', ')', ']', '>'];
+  let result = [];
+  if (str.length % 2 !== 0) {
+    return false;
+  }
+  for (let i = 0; i < str.length; i += 1) {
+    // console.log(str[i]);
+    if (closeParentheses.includes(str[i])) {
+      if (result.length === 0) {
+        return false;
+      }
+      if (result[result.length - 1] === pattern[str[i]]) {
+        result.pop();
+      } else if (str[i] === result[result.length - 1]) {
+        if (result === 0) {
+          return false;
+        }
+        result.pop();
+      } else {
+        result.push(str[i]);
+      }
+    } else {
+      result.push(str[i]);
+    }
+  }
+  // console.log(result);
+  if (result.length === 0) {
+    return true;
+  }
+  return false;
+}
+
+let result = brackets()
+// console.log(result);
+
+// console.log(new Date(`Tue, 05 Apr 2016 00:00:00 GMT`).getUTCHours());
+
+function getDigitalRoot(n) {
+  const result = n.toString().split('').reduce((acc, el) => +acc + +el);
+  if (result.toString().length > 1) {
+    getDigitalRoot(result);
+  }
+  return result;
+}
+
+let res = getDigitalRoot(1234556)
+// console.log(res);
+
+// let n = 191;
+// function getSumOfDigits(n) {
+//   n = n.toString().split("").reduce((acc, el) => +acc + +el)
+//   (n.toString().length > 1) ? getSumOfDigits(n)
+//   }
+//   console.log(n);
+
+// }
+// getSumOfDigits(n)
+//! Алгоритм Луна
+let cart = 4561261212345467
+let trueCard1 = 79927398713
+let trueCard2 = 4012888888881881;
+let falseCard = 4571234567890111
+
+function isCreditCardNumber(ccn) {
+  let card = ccn.toString().split('');
+  card = card.map((el, i) => {
+    if (card.length % 2 === 0 && i % 2 === 0 && i !== card.length - 1) {
+      return el * 2 > 9 ? el * 2 - 9 : el * 2;
+    }
+    if (card.length % 2 !== 0 && i % 2 === 1 && i !== card.length - 1) {
+      console.log(`this`);
+      return el * 2 > 9 ? el * 2 - 9 : el * 2;
+    }
+    return +el;
+  });
+  console.log(card);
+  if (card.reduce((acc, el) => +acc + +el) % 10 === 0) {
+    return true;
+  }
+  return false;
+}
+
+let card = isCreditCardNumber(trueCard1)
+console.log(card);
