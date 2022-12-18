@@ -221,8 +221,26 @@ function findFirstSingleChar(str) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  let result = [];
+  let start;
+  let end;
+  if (isStartIncluded) {
+    start = '[';
+  } else {
+    start = '(';
+  }
+  if (isEndIncluded) {
+    end = ']';
+  } else {
+    end = ')';
+  }
+  if (a > b) {
+    result = [b, a];
+  } else {
+    result = [a, b];
+  }
+  return start + result.join(', ') + end;
 }
 
 
@@ -477,8 +495,61 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  let winner;
+  // if (!position.flat(Infinity).length) {
+  //   return winner;
+  // }
+  // for (let i = 0; i < position.length; i += 1) {
+  //   for (let j = 0; j < position[i].length; j += 1) {
+  //     if (position[i][j] === position[i][j + 1]
+  //       && position[i][j] === position[i][j + 2]
+  //       && position[i][j]) {
+  //       winner = `${position[i][j]}`;
+  //       break;
+  //     }
+  //     if (position[i][j] === position[i + 1][j]
+  //       && position[i][j] === position[i + 2][j]
+  //       && position[i][j]) {
+  //       winner = `${position[i][j]}`;
+  //       break;
+  //     }
+  //     if (position[i][j] === position[i + 1][j + 1]
+  //       && position[i][j] === position[i + 2][j + 2]
+  //       && position[i][j]) {
+  //       winner = `${position[i][j]}`;
+  //       break;
+  //     }
+  //     if (position[i][j + 2] === position[i + 1][j + 1]
+  //       && position[i][j + 2] === position[i + 2][j]
+  //       && position[i][j + 2]) {
+  //       winner = `${position[i][j + 2]}`;
+  //       break;
+  //     }
+  //   }
+  // }
+  if (position[0][2] === position[1][1] && position[0][2] === position[2][0] && position[0][0]) {
+    return `${position[0][2]}`;
+  }
+  if (position[0][0] === position[1][1] && position[0][0] === position[2][2] && position[0][0]) {
+    return `${position[0][0]}`;
+  }
+  if (position[0][0] === position[1][0] && position[0][0] === position[2][0] && position[0][0]) {
+    return `${position[0][0]}`;
+  }
+  for (let i = 0; i < position.length; i += 1) {
+    if (position[i][0] === position[i][1] && position[i][0] === position[i][2] && position[i][0]) {
+      winner = `${position[i][0]}`;
+      break;
+    }
+  }
+  for (let i = 0; i < position.length; i += 1) {
+    if (position[0][i] === position[1][i] && position[0][i] === position[2][i] && position[0][i]) {
+      winner = `${position[0][i]}`;
+      break;
+    }
+  }
+  return winner;
 }
 
 

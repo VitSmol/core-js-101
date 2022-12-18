@@ -334,12 +334,12 @@ function isCreditCardNumber(ccn) {
       return el * 2 > 9 ? el * 2 - 9 : el * 2;
     }
     if (card.length % 2 !== 0 && i % 2 === 1 && i !== card.length - 1) {
-      console.log(`this`);
+      // console.log(`this`);
       return el * 2 > 9 ? el * 2 - 9 : el * 2;
     }
     return +el;
   });
-  console.log(card);
+  // console.log(card);
   if (card.reduce((acc, el) => +acc + +el) % 10 === 0) {
     return true;
   }
@@ -347,4 +347,57 @@ function isCreditCardNumber(ccn) {
 }
 
 let card = isCreditCardNumber(trueCard1)
-console.log(card);
+// console.log(card);
+
+// *   0, 1, true, true   => '[0, 1]'
+// *   0, 1, true, false  => '[0, 1)'
+// *   0, 1, false, true  => '(0, 1]'
+// *   0, 1, false, false => '(0, 1)'
+// * Smaller number has to be first :
+// *   5, 3, true, true   => '[3, 5]'
+// *
+// */
+// function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+//   let result = [];
+//   let start;
+//   let end;
+//   isStartIncluded ? start = '[' : start = '(';
+//   isEndIncluded ? end = ']' : end = ')'
+//   a > b ? result = [b, a] : result = [a, b];
+//   return start + result.join(',') + end;
+// }
+// console.log(getIntervalString(5, 3, true, false));
+
+const position = [
+                  [, , ],
+                  [, ,],
+                  [, , ]
+                ]
+
+function evaluateTicTacToePosition(position) {
+  console.log();
+  if (!position.flat().length) {
+    return undefined;
+  }
+  // let winner;
+  for (let i = 0; i < position.length; i += 1) {
+    for (let j = 0; j < position[i].length; j += 1) {
+      if (position[i][j] == position[i][j+1] && position[i][j] == position [i][j+2] && position[i][j]) {
+        return position[i][j]
+      }
+      if (position[i][j] === position[i+1][j] && position[i][j] == position[i+2][j] && position[i][j]) {
+        return position[i][j]
+      }
+      if (position[i][j] === position[i+1][j+1] && position[i][j] == position[i+2][j+2] && position[i][j]) {
+        return position[i][j]
+      }
+      if (position[i][j+2] === position[i+1][j+1] && position[i][j+2] == position[i+2][j] && position[i][j+2]) {
+        return position[i][j+2]
+      }
+    }
+  }
+  return undefined;
+}
+console.log(
+  evaluateTicTacToePosition(position)
+);
