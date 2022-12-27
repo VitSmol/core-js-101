@@ -437,8 +437,19 @@ function toNaryString(num, n) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  // throw new Error('Not implemented');
+  let res = '';
+  const arr = pathes[0].split('/');
+  for (let i = 0; i < arr.length; i += 1) {
+    let bool = true;
+    for (let k = 0; k < pathes.length; k += 1) {
+      const temp = pathes[k].split('/');
+      if (!temp.includes(arr[i])) bool = false;
+    }
+    if (bool) res += `${arr[i]}/`;
+  }
+  return res;
 }
 
 
@@ -460,8 +471,25 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  // throw new Error('Not implemented');
+  const result = [];
+  if (m1[0].length !== m2.length) {
+    return false;
+  }
+  for (let i = 0; i < m1.length; i += 1) {
+    result[i] = [];
+  }
+  for (let i = 0; i < m2[0].length; i += 1) {
+    for (let k = 0; k < m1.length; k += 1) {
+      let temp = 0;
+      for (let j = 0; j < m2.length; j += 1) {
+        temp += m1[k][j] * m2[j][i];
+      }
+      result[k][i] = temp;
+    }
+  }
+  return result;
 }
 
 
